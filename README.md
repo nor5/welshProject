@@ -16,7 +16,7 @@ A user should be able to enjoy the recipes by using the API to:
     -list his favorite recipes
 
 ## To Setup and Start
-''' 
+```
 
 #build docker image
     sudo docker build -t welshacademy .
@@ -24,8 +24,8 @@ A user should be able to enjoy the recipes by using the API to:
    
     docker run -e WA_PORT=8080 -p 8080:8080 welshacademy
 
-'''
-'''
+```
+```
 
  #on local
     pip install -r requirements.txt 
@@ -37,35 +37,36 @@ A user should be able to enjoy the recipes by using the API to:
     # run the application
     python manage.py run
 
-'''
+```
     
     
 ## Create an admin
-''' 
+``` 
 #with Docker
    docker exec -it 8aad1377ce7e python manage.py create_admin
-   
-'''
-'''
+
+```
+```
   ~/welshProject$ docker exec -it 8aad1377ce7e python manage.py create_admin
   Enter your name: admin
   Enter password: 
   Admin with name admin created successfully!
-'''
-''' #create admin locally
+```
+```
+ #create admin locally
     python manage.py create_admin
-'''
+```
 ## API endPoints
 ### List all ingredients
-'''
+```
 
 curl -X 'GET' \
    'http://172.17.0.2:8080/api/ingredients' \
    -H 'accept: */*'
 
-'''
+```
 ### Add a new ingredient
-'''
+```
 
 curl -X 'POST' \
   'http://127.0.0.1:8080/api/ingredients' \
@@ -75,16 +76,16 @@ curl -X 'POST' \
   "name": "secret ingredient"
 }'
 
-'''
+```
 ### List Recipes
-'''
+```
 curl -X 'GET' \
   'http://127.0.0.1:8080/api/recipes' \
   -H 'accept: */*'
 
-'''
+```
 ### Add a new recipe 
-''' 
+```
  curl -X 'POST' \
   'http://127.0.0.1:8080/api/recipes' \
   -H 'accept: */*' \
@@ -106,21 +107,21 @@ curl -X 'GET' \
    }
   '
 
-'''
+```
 ## Swagger UI:
 Hosted Locally <http://127.0.0.1:5000/api/ui/>
 Hosted via Docker <http://172.17.0.2:8080/api/ui/>
 ![Swagger UI](images/swagger.png)
 ## Unit Test with Docker
-'''
+```
  #build docker image for testing
     docker build -t welshacademy-tests -f Dockerfile.test .
     #run tests
     docker run  welshacademy-tests
 
-'''
+```
 
-''' 
+``` 
     ~/welshProject$ docker run  welshacademy-tests
     test_home_redirect (test_homePage.TestAppRoute) ... ok
     test_create_existing_ingredient (test_ingredients.TestIngredients) ... ok
@@ -137,15 +138,15 @@ Hosted via Docker <http://172.17.0.2:8080/api/ui/>
     Ran 10 tests in 9.740s
 
     OK
-'''
+```
 
 
 
-''' 
+```
    # run test on local
     python manage.py tests
 
-'''
+```
 ## Contact
 
 If you have any questions or comments please email me at belkacem.nourelhouda@hotmail.com.
