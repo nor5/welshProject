@@ -1,0 +1,8 @@
+*.pyc
+venv
+migrations/
+tmp
+__pycache__
+env.sh
+*.db
+.vscode
