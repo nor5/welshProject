@@ -18,7 +18,7 @@ A user should be able to enjoy the recipes by using the API to:
 ## To Setup and Start
 ```
 
-#build docker image
+    #build docker image
     sudo docker build -t welshacademy .
     #run the container
    
@@ -27,7 +27,7 @@ A user should be able to enjoy the recipes by using the API to:
 ```
 ```
 
- #on local
+    #on local
     pip install -r requirements.txt 
     # Initialize the database
     flask db init
@@ -42,7 +42,7 @@ A user should be able to enjoy the recipes by using the API to:
     
 ## Create an admin
 ``` 
-#with Docker
+   #with Docker
    docker exec -it 8aad1377ce7e python manage.py create_admin
 
 ```
@@ -53,14 +53,13 @@ A user should be able to enjoy the recipes by using the API to:
   Admin with name admin created successfully!
 ```
 ```
- #create admin locally
+   #create admin locally
     python manage.py create_admin
 ```
 ## API endPoints
 ### List all ingredients
 ```
-
-curl -X 'GET' \
+   curl -X 'GET' \
    'http://172.17.0.2:8080/api/ingredients' \
    -H 'accept: */*'
 
@@ -68,25 +67,25 @@ curl -X 'GET' \
 ### Add a new ingredient
 ```
 
-curl -X 'POST' \
+  curl -X 'POST' \
   'http://127.0.0.1:8080/api/ingredients' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "secret ingredient"
-}'
+  }'
 
 ```
 ### List Recipes
 ```
-curl -X 'GET' \
+   curl -X 'GET' \
   'http://127.0.0.1:8080/api/recipes' \
   -H 'accept: */*'
 
 ```
 ### Add a new recipe 
 ```
- curl -X 'POST' \
+  curl -X 'POST' \
   'http://127.0.0.1:8080/api/recipes' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
@@ -114,7 +113,7 @@ Hosted via Docker <http://172.17.0.2:8080/api/ui/>
 ![Swagger UI](images/swagger.png)
 ## Unit Test with Docker
 ```
- #build docker image for testing
+   #build docker image for testing
     docker build -t welshacademy-tests -f Dockerfile.test .
     #run tests
     docker run  welshacademy-tests
@@ -143,7 +142,7 @@ Hosted via Docker <http://172.17.0.2:8080/api/ui/>
 
 
 ```
-   # run test on local
+   #run test on local
     python manage.py tests
 
 ```
