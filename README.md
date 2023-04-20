@@ -16,12 +16,18 @@ A user should be able to enjoy the recipes by using the API to:
     -list his favorite recipes
 
 ## To Setup and Start
-''' #build docker image
+''' 
+
+#build docker image
     sudo docker build -t welshacademy .
     #run the container
+   
     docker run -e WA_PORT=8080 -p 8080:8080 welshacademy
+
 '''
-''' #on local
+'''
+
+ #on local
     pip install -r requirements.txt 
     # Initialize the database
     flask db init
@@ -30,12 +36,15 @@ A user should be able to enjoy the recipes by using the API to:
     flask db upgrade
     # run the application
     python manage.py run
+
 '''
     
     
 ## Create an admin
-''' #with Docker
+''' 
+#with Docker
    docker exec -it 8aad1377ce7e python manage.py create_admin
+   
 '''
 '''
   ~/welshProject$ docker exec -it 8aad1377ce7e python manage.py create_admin
@@ -48,12 +57,16 @@ A user should be able to enjoy the recipes by using the API to:
 '''
 ## API endPoints
 ### List all ingredients
-'''curl -X 'GET' \
+'''
+
+curl -X 'GET' \
    'http://172.17.0.2:8080/api/ingredients' \
    -H 'accept: */*'
+
 '''
 ### Add a new ingredient
 '''
+
 curl -X 'POST' \
   'http://127.0.0.1:8080/api/ingredients' \
   -H 'accept: */*' \
@@ -61,14 +74,18 @@ curl -X 'POST' \
   -d '{
   "name": "secret ingredient"
 }'
+
 '''
 ### List Recipes
-'''curl -X 'GET' \
+'''
+curl -X 'GET' \
   'http://127.0.0.1:8080/api/recipes' \
   -H 'accept: */*'
+
 '''
 ### Add a new recipe 
-'''  curl -X 'POST' \
+''' 
+ curl -X 'POST' \
   'http://127.0.0.1:8080/api/recipes' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
@@ -95,12 +112,16 @@ Hosted Locally <http://127.0.0.1:5000/api/ui/>
 Hosted via Docker <http://172.17.0.2:8080/api/ui/>
 ![Swagger UI](images/swagger.png)
 ## Unit Test with Docker
-''' #build docker image for testing
+'''
+ #build docker image for testing
     docker build -t welshacademy-tests -f Dockerfile.test .
     #run tests
     docker run  welshacademy-tests
+
 '''
-''' ~/welshProject$ docker run  welshacademy-tests
+
+''' 
+    ~/welshProject$ docker run  welshacademy-tests
     test_home_redirect (test_homePage.TestAppRoute) ... ok
     test_create_existing_ingredient (test_ingredients.TestIngredients) ... ok
     test_create_new_ingredient (test_ingredients.TestIngredients) ... ok
@@ -120,8 +141,10 @@ Hosted via Docker <http://172.17.0.2:8080/api/ui/>
 
 
 
-''' # run test on local
+''' 
+   # run test on local
     python manage.py tests
+
 '''
 ## Contact
 
