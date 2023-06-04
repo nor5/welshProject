@@ -34,18 +34,17 @@ components:
 
 paths:
    /ingredients:
-     get:
+    get:
+       operationId: "views.ingredients.list_all_ingredients"
        tags:
-         - Ingredient
-       operationId: "views.read_all_ingredients"
-       
-       summary: "Read the list of ingredients"
+         - User
+       summary: " List all ingredients"
        responses:
          "200":
            description: "Successfully read ingredients list"
      
-     post:
-       operationId: "views.create_ingredient"
+    post:
+       operationId: "views.ingredients.create_ingredient"
        tags:
          - Ingredient
        summary: "Create ingredients"
@@ -63,16 +62,15 @@ paths:
    
    /recipes:
       get:
-       operationId: "views.read_all_recipes"
+       operationId: "views.recipes.list_all_recipes"
        tags:
-         - Recipe
-       summary: "Read the list of recipes"
+         - User
+       summary: " List all recipes"
        responses:
          "200":
            description: "Successfully read recipes list"
-     
       post:
-        operationId: "views.create_recipe"
+        operationId: "views.recipes.create_recipe"
         tags:
            - Recipe
         summary: "Create a recipe "
@@ -109,7 +107,7 @@ paths:
 
    /UserRegistration:
      post:
-        operationId: "views.create_user"
+        operationId: "views.account_management.create_user"
         tags:
            - User
         summary: "Register a  new user "
@@ -134,7 +132,7 @@ paths:
 
    /userLogin:
      post:
-        operationId: "views.login"
+        operationId: "views.account_management.login"
         tags:
            - User
         summary: "User login "
@@ -158,7 +156,7 @@ paths:
            description: "You are logged in successfully"
    /userLogout:
     get:
-       operationId: "views.logout"
+       operationId: "views.account_management.logout"
        tags:
          - User
        summary: "User logout"
@@ -166,29 +164,13 @@ paths:
          "200":
            description: "You successfully logged out"
     
-   /listIngredients:
-    get:
-       operationId: "views.list_all_ingredients"
-       tags:
-         - User
-       summary: " List all ingredients"
-       responses:
-         "200":
-           description: "Successfully read ingredients list"
+   
 
-   /listRecipes:
-    get:
-       operationId: "views.list_all_recipes"
-       tags:
-         - User
-       summary: " List all recipes"
-       responses:
-         "200":
-           description: "Successfully read recipes list"
+
 
    /recipes/{ingredient_name}:
     get:
-      operationId: "views.filter_recipe"
+      operationId: "views.recipes.filter_recipe"
       tags:
         - User
       summary: "filter recipes with specifique ingredient"
@@ -200,7 +182,7 @@ paths:
 
    /favoriteRecipes:
      post:
-        operationId: "views.favorite_recipes"
+        operationId: "views.favorite_recipes.favorite_recipes"
         tags:
            - User
         summary: "favorite recipes "
@@ -228,7 +210,7 @@ paths:
      delete:
        tags:
         - User
-       operationId: "views.delete_favorite"
+       operationId: "views.favorite_recipes.delete_favorite"
        summary: "Delete favorite recipes"
        requestBody:
           description: "Unflag favorite recipes"
@@ -251,7 +233,7 @@ paths:
            description: "Successfully deleted recipes"
 
      get:
-       operationId: "views.list_favorite_recipes"
+       operationId: "views.favorite_recipes.list_favorite_recipes"
        tags:
         - User
        summary: "List all favorite recipes"

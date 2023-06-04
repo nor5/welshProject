@@ -3,17 +3,10 @@ from app import  db
 from models import User
 from base_test import BaseTestCase
 class TestUserAccount(BaseTestCase):
-    def test_create_user(self):
-        #Create an admin for authentication 
-        admin = User(name="adminTest", password="admin_user", is_admin=True)
-        db.session.add(admin)
-        db.session.commit()
-        
-        # Login as the admin user
-        with self.client.session_transaction() as sess:
-            sess['name'] = 'adminTest'
 
-        # Create a new user
+    def test_create_user(self):
+       
+        #  new user data
         new_user = {
             "name": "test_user",
             "password": "test_password"
@@ -39,25 +32,14 @@ class TestUserAccount(BaseTestCase):
         self.assertEqual(response.json['detail'], "user test_user must be an admin to create a user")
     
     def test_login(self):
-        #Create an admin for authentication 
-        admin = User(name="adminTest", password="admin_user", is_admin=True)
-        db.session.add(admin)
-        db.session.commit()
         
-        # Login as the admin user
-        with self.client.session_transaction() as sess:
-            sess['name'] = 'adminTest'
-
-        # Create a new user
-        new_user = {
-            "name": "test_user",
-            "password": "test_password"
+        # user data
+        user = {
+            "name": 'userTest',
+            "password": "user_password"
           }
-        response = self.client.post('http://localhost:5000/api/UserRegistration', json=new_user)
-
-        # Check the response status code and data
-        self.assertEqual(response.status_code, 201)
-        response = self.client.post('http://localhost:5000/api/userLogin', json=new_user)
+       
+        response = self.client.post('http://localhost:5000/api/userLogin', json=user)
         # Check the response status code and data
         self.assertEqual(response.status_code, 201)
         
@@ -69,6 +51,14 @@ class TestUserAccount(BaseTestCase):
         response = self.client.post('http://localhost:5000/api/userLogin', json=login_data)
         # Check the response status code and data
         self.assertEqual(response.status_code, 403)
+    
+    def test_logout(self):
+        
+        # make a request to the endpoint API
+        response = self.client.get('http://localhost:5000/api/userLogout')
+        # check the response status code
+        self.assertEqual(response.status_code, 204)
+
 
 
 if __name__ == '__main__':

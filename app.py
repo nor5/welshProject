@@ -1,13 +1,12 @@
-from flask import redirect, Flask
+#flask application that utilizes the Connexion library 
+# for building REstfulAPI with swagger integration
+
+from flask import redirect
 import pathlib
+#The config function is used to retrieve values from a 
+# configuration file or environment variables
 from decouple import config
 import connexion
-from flask_marshmallow import Marshmallow
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
-from datetime import timedelta
-from flask_migrate import Migrate
-from flask import Flask
 from config import db, ma, migrate,bcrypt
 
 # Get the parent directory of the current file
@@ -16,7 +15,11 @@ basedir = pathlib.Path(__file__).parent.resolve()
 connex_app = connexion.App(__name__, specification_dir=basedir)
 # Add the Swagger YAML file to the Connexion app instance
 connex_app.add_api(basedir / "swagger.yml")
+
+#Get the Flask application object from the Connexion app instance.
 app = connex_app.app
+
+#Load configuration settings from an object specified in the APP_SETTINGS environment variable
 app.config.from_object(config("APP_SETTINGS"))
 
 

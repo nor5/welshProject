@@ -6,6 +6,7 @@ from app import db
 import app
 from models import User
 
+#create command-line interfaces
 cli = FlaskGroup(app)
 
 
@@ -13,7 +14,9 @@ cli = FlaskGroup(app)
 @cli.command("test")
 def test():
     """Runs the unit tests without coverage."""
+    #searches for test modules and test cases in the "tests" directory.
     tests = unittest.TestLoader().discover("tests")
+    
     result = unittest.TextTestRunner(verbosity=2).run(tests)
     if result.wasSuccessful():
         return 0

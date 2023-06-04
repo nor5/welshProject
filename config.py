@@ -15,6 +15,10 @@ ma = Marshmallow()
 bcrypt = Bcrypt()
 migrate = Migrate()
 class Config:
+
+    #provide additional security measures in a Flask application 
+    #protect against session-related attacks
+    #used to encrypt and sign the session cookies,
     SECRET_KEY = 'welshAcademyTest'
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=10)
 
@@ -26,4 +30,8 @@ class DevelopmentConfig(Config):
 class TestConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = f"sqlite:///{basedir / 'welshAcademy_test.db'}"
+    #track modifications of objects and emit signals if it is TRUE, 
+    #such as adding, modifying, or deleting records,
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    
