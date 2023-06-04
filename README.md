@@ -143,7 +143,7 @@ Hosted via Docker <http://172.17.0.2:8080/api/ui/>
 
 ```
    #run test on local
-    python manage.py tests
+    python manage.py test
 
 ```
 ## Contact
