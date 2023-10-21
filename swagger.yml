@@ -1,4 +1,3 @@
-
 openapi: 3.0.0
 info:
   title: "Welsh Academy Flask REST API"
@@ -6,20 +5,19 @@ info:
   version: "1.0.0"
 
 servers:
-   - url: "/api"
+  - url: "/api"
 
 components:
   schemas:
     Ingredient:
       type: "object"
       required:
-          - name
-         
+        - name
+
       properties:
-        
         name:
           type: "string"
-        
+
   parameters:
     ingredient_name:
       name: "ingredient_name"
@@ -27,148 +25,138 @@ components:
       in: path
       required: true
       schema:
-        type: "string"    
-            
-       
-        
+        type: "string"
 
 paths:
-   /ingredients:
+  /ingredients:
     get:
-       operationId: "views.ingredients.list_all_ingredients"
-       tags:
-         - User
-       summary: " List all ingredients"
-       responses:
-         "200":
-           description: "Successfully read ingredients list"
-     
+      operationId: "views.ingredients.list_all_ingredients"
+      tags:
+        - User
+      summary: " List all ingredients"
+      responses:
+        "200":
+          description: "Successfully read ingredients list"
+
     post:
-       operationId: "views.ingredients.create_ingredient"
-       tags:
-         - Ingredient
-       summary: "Create ingredients"
-       requestBody:
-          description: "Create ingredients"
-          required: True
-          content:
-            application/json:
-              schema:
-                x-body-name: "ingredient"
-                $ref: "#/components/schemas/Ingredient"
-       responses:
-         "201":
-           description: "Successfully created ingredient"
-   
-   /recipes:
-      get:
-       operationId: "views.recipes.list_all_recipes"
-       tags:
-         - User
-       summary: " List all recipes"
-       responses:
-         "200":
-           description: "Successfully read recipes list"
-      post:
-        operationId: "views.recipes.create_recipe"
-        tags:
-           - Recipe
-        summary: "Create a recipe "
-        requestBody:
-          description: "recipe to create"
-          required: True
-          content:
-            application/json:
-              schema:
-                x-body-name: "recipe"
-                type: "object"
-                properties:
-                  name:
-                    type: string
-                  ingredients:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                  cookTime:
-                    type: string
-                  
-                  serving:
-                    type: integer
-                  preparation:
-                    type: string
-                  
-        responses:
-         "201":
-           description: "Successfully created a recipe"
+      operationId: "views.ingredients.create_ingredient"
+      tags:
+        - Ingredient
+      summary: "Create ingredients"
+      requestBody:
+        description: "Create ingredients"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "ingredient"
+              $ref: "#/components/schemas/Ingredient"
+      responses:
+        "201":
+          description: "Successfully created ingredient"
 
-
-   /UserRegistration:
-     post:
-        operationId: "views.account_management.create_user"
-        tags:
-           - User
-        summary: "Register a  new user "
-        requestBody:
-          description: "User Registration"
-          required: True
-          content:
-            application/json:
-              schema:
-                x-body-name: "user"
-                type: "object"
-                properties:
-                  name:
-                    type: string
-                  password:
-                    type: string
-                    
-                  
-        responses:
-         "201":
-           description: "Successfully created  user"
-
-   /userLogin:
-     post:
-        operationId: "views.account_management.login"
-        tags:
-           - User
-        summary: "User login "
-        requestBody:
-          description: "User login"
-          required: True
-          content:
-            application/json:
-              schema:
-                x-body-name: "user"
-                type: "object"
-                properties:
-                  name:
-                    type: string
-                  password:
-                    type: string
-                    
-                  
-        responses:
-         "201":
-           description: "You are logged in successfully"
-   /userLogout:
+  /recipes:
     get:
-       operationId: "views.account_management.logout"
-       tags:
-         - User
-       summary: "User logout"
-       responses:
-         "200":
-           description: "You successfully logged out"
-    
-   
+      operationId: "views.recipes.list_all_recipes"
+      tags:
+        - User
+      summary: " List all recipes"
+      responses:
+        "200":
+          description: "Successfully read recipes list"
+    post:
+      operationId: "views.recipes.create_recipe"
+      tags:
+        - Recipe
+      summary: "Create a recipe "
+      requestBody:
+        description: "recipe to create"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "recipe"
+              type: "object"
+              properties:
+                name:
+                  type: string
+                ingredients:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                cookTime:
+                  type: string
 
+                serving:
+                  type: integer
+                preparation:
+                  type: string
 
+      responses:
+        "201":
+          description: "Successfully created a recipe"
 
-   /recipes/{ingredient_name}:
+  /UserRegistration:
+    post:
+      operationId: "views.account_management.create_user"
+      tags:
+        - User
+      summary: "Register a  new user "
+      requestBody:
+        description: "To register a new user, log in as an admin first using the credentials <name: admin>, <password: admin>."
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "user"
+              type: "object"
+              properties:
+                name:
+                  type: string
+                password:
+                  type: string
+
+      responses:
+        "201":
+          description: "Successfully created  user"
+
+  /userLogin:
+    post:
+      operationId: "views.account_management.login"
+      tags:
+        - User
+      summary: "User login "
+      requestBody:
+        description: "User login"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "user"
+              type: "object"
+              properties:
+                name:
+                  type: string
+                password:
+                  type: string
+
+      responses:
+        "201":
+          description: "You are logged in successfully"
+  /userLogout:
+    get:
+      operationId: "views.account_management.logout"
+      tags:
+        - User
+      summary: "User logout"
+      responses:
+        "200":
+          description: "You successfully logged out"
+
+  /recipes/{ingredient_name}:
     get:
       operationId: "views.recipes.filter_recipe"
       tags:
@@ -180,64 +168,63 @@ paths:
         "200":
           description: "Successfully list recipes"
 
-   /favoriteRecipes:
-     post:
-        operationId: "views.favorite_recipes.favorite_recipes"
-        tags:
-           - User
-        summary: "favorite recipes "
-        requestBody:
-          description: "Flag your favorite recipes"
-          required: True
-          content:
-            application/json:
-              schema:
-                x-body-name: "recipes"
-                type: "object"
-                properties:
-                  recipes:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-          
-        responses:
-         "201":
-           description: "Successfully add recipe as favorite"
-     
-     delete:
-       tags:
+  /favoriteRecipes:
+    post:
+      operationId: "views.favorite_recipes.favorite_recipes"
+      tags:
         - User
-       operationId: "views.favorite_recipes.delete_favorite"
-       summary: "Delete favorite recipes"
-       requestBody:
-          description: "Unflag favorite recipes"
-          required: True
-          content:
-            application/json:
-              schema:
-                
-                type: "object"
-                properties:
-                  recipes:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-       responses:
-         "204":
-           description: "Successfully deleted recipes"
+      summary: "favorite recipes "
+      requestBody:
+        description: "Flag your favorite recipes"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "recipes"
+              type: "object"
+              properties:
+                recipes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
 
-     get:
-       operationId: "views.favorite_recipes.list_favorite_recipes"
-       tags:
+      responses:
+        "201":
+          description: "Successfully add recipe as favorite"
+
+    delete:
+      tags:
         - User
-       summary: "List all favorite recipes"
-       
-       responses:
+      operationId: "views.favorite_recipes.delete_favorite"
+      summary: "Delete favorite recipes"
+      requestBody:
+        description: "Unflag favorite recipes"
+        required: True
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                recipes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+      responses:
+        "204":
+          description: "Successfully deleted recipes"
+
+    get:
+      operationId: "views.favorite_recipes.list_favorite_recipes"
+      tags:
+        - User
+      summary: "List all favorite recipes"
+
+      responses:
         "200":
           description: "Successfully list favorite recipes"
