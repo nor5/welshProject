@@ -53,7 +53,7 @@ A user should be able to enjoy the recipes by using the API to:
 ```
   ~/welshProject$ docker exec -it 8aad1377ce7e python manage.py create_admin
   Enter your name: admin
-  Enter password: ADMINPS
+  Enter password: admin
   Admin with name admin created successfully!
 ```
 
