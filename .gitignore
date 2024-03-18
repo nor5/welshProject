@@ -6,4 +6,3 @@ __pycache__
 env.sh
 *.db
 .vscode
-.env
